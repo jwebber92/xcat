@@ -7,6 +7,9 @@ config.json
 # local xcat tradedb.json - see trade-db.js
 tradedb.json
 
+# IntelliJ project files
+.idea/*
+
 # Logs
 logs
 *.log
