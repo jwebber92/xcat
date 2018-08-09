@@ -1,0 +1,14 @@
+{
+  "id": "/Config",
+  "type": "object",
+  "properties": {
+    "chainANetwork": {"enum": ["public", "testnet", "localnet"]},
+    "aliceAccountSecret": {"format": "stellarSecretSeed"},
+    "chainBNetwork": {"enum": ["public", "testnet", "localnet"]},
+    "bobAccountSecret": {"format": "stellarSecretSeed"}
+  },
+  "required": [
+    "stellarNetwork",
+    "stellarAccountSecret"
+  ]
+}

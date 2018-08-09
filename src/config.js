@@ -7,7 +7,7 @@ import {
   objToStr,
 } from './utils'
 
-const ConfigSchema = require('./schema/config.json')
+const ConfigSchema = require('./schema/config2.json')
 
 const {validator, ajv} = (() => {
   const ajv = new Ajv({allErrors: true})
@@ -34,7 +34,7 @@ class Config {
     const valid = Config.validate(config)
     if (!valid)
       throw new Error(
-        `config doesn't conform to schema config.json [\n` +
+        `config doesn't conform to schema config2.json [\n` +
           `\tmessage: "${ajv.errorsText(validator.errors)}"\n` +
           `\traw: ${objToStr(validator.errors)}` +
           `]`
