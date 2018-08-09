@@ -277,15 +277,15 @@ class Protocol {
 
     // TODO Review status measures
     if (validHoldingAccount === true) {
-      if ((await this.stellarRefundTxCreated()) === false)
+      if ((await this.chainARefundTxCreated()) === false)
         {return Status.CHAIN_A_HOLDING_ACCOUNT;}
-      if ((await this.stellarFundsDeposited()) === false)
+      if ((await this.chainAFundsDeposited()) === false)
         {return Status.CHAIN_A_REFUND_TX;}
       if ((await this.isChainBPrepared()) === false)
         {return Status.CHAIN_A_DEPOSIT;}
       if ((await this.isChainBFulfilled()) === false)
         {return Status.CHAIN_B_HOLDING_ACCOUNT;}
-      if ((await this.isStellarFulfilled()) === false)
+      if ((await this.isChainAFulfilled()) === false)
         {return Status.CHAIN_B_WITHDRAW;}
     }
 
@@ -296,7 +296,7 @@ class Protocol {
     throw new Error('statusEthereumInitiatedTrade not yet implemented')
   }
 
-  stellarRefundTxCreated() {
+  chainARefundTxCreated() {
     const st = this.trade.chainA;
     return Promise.resolve(
       has(st, 'refundTx') &&
@@ -307,7 +307,7 @@ class Protocol {
     // TODO: validate the contents of the envelope
   }
 
-  stellarFundsDeposited() {
+  chainAFundsDeposited() {
     return this.chainA
       .getBalance(this.trade.chainA.holdingAccount)
       .then(balance => balance === this.trade.chainA.amount)
@@ -322,7 +322,7 @@ class Protocol {
     return prepared
   }
 
-  isStellarFulfilled() {
+  isChainAFulfilled() {
     return this.chainA
       .getBalance(this.trade.chainA.holdingAccount)
       .then(balance => balance === 0)
