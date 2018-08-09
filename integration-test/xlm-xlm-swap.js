@@ -4,7 +4,7 @@ import Promise from 'bluebird'
 
 import Config from '../src/config'
 import Trade from '../src/trade'
-import Protocol from '../src/protocol'
+import Protocol from '../src/protocol2'
 
 import {newSecretHashPair} from '../src/utils'
 
@@ -18,8 +18,8 @@ import {newSecretHashPair} from '../src/utils'
  */
 const AliceA = sdk.Keypair.random();
 const BobB = sdk.Keypair.random();
-const AliceEscrowA = sdk.Keypair.random();
-const BobEscrowB = sdk.Keypair.random();
+// const AliceEscrowA = sdk.Keypair.random();
+// const BobEscrowB = sdk.Keypair.random();
 const AliceB = sdk.Keypair.random();
 const BobA = sdk.Keypair.random();
 
@@ -32,7 +32,7 @@ const {secret: preImageStr, hash: hashXStr} = newSecretHashPair();
  * Trade definition
  */
 const aliceTrade = {
-  initialSide: Protocol.TradeSide.STELLARA, // Need new protocol
+  initialSide: Protocol.TradeSide.CHAIN_A,
   timelock: Date.now() + 120,
   commitment: hashXStr.substring(2), // slice off prefix '0x'
   originChain: {
@@ -50,7 +50,7 @@ const aliceTrade = {
 };
 
 const bobTrade = {
-  initialSide: Protocol.TradeSide.STELLARB, // Need new protocol
+  initialSide: Protocol.TradeSide.CHAIN_B,
   timelock: Date.now() + 60,
   commitment: hashXStr.substring(2), // slice off prefix '0x'
   originChain: {
